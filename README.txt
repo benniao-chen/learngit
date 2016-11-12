@@ -8,3 +8,6 @@ git diff                	查看文件不同
 git log --pretty=oneline 	查看历史提交日志
 get reset --hard 		回退版本 PS: HEAD表示当前版本，HEAD^上一个版本，HEAD~100前100个版本，指定commit id
 git reflog			查看命令历史
+git checkout --file		捡出版本库或者暂存区文件
+git reset HEAD file		撤销暂存区的修改
+git rm 				删除版本库中的文件
