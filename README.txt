@@ -15,6 +15,7 @@ git clone 			拷贝远程项目
 git checkout --file		捡出版本库或者暂存区文件
 git checkout -b	name		创建分支
 git branch 			查看当前分支
+git branch -d  			删除当前分支
 
 
 
