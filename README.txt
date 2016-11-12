@@ -11,3 +11,4 @@ git reflog			查看命令历史
 git checkout --file		捡出版本库或者暂存区文件
 git reset HEAD file		撤销暂存区的修改
 git rm 				删除版本库中的文件
+git push -u origin master	将本地库内容推送到远程
