@@ -1,0 +1,121 @@
+<!doctype html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Lazy Load Enabled</title>
+		<style type="text/css">
+			.fix-right {
+				position: fixed;
+				right: 0;
+				top: 0;
+				height: 100vh;
+				display: block;
+				list-style: none;
+				margin: 0;
+			}
+			.fix-right li {
+				color: blue;
+				margin: 0;
+				font-size: 30px;
+			    height: 3.85vh;
+			    line-height: 3.85vh;
+			    width: 60px;
+			    text-align: center;
+			}
+			.show-letter {
+				color: blue;
+				font-size: 60px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="show-letter">Default</div>
+
+		<ul class="fix-right">
+			<li>A</li>
+			<li>B</li>
+			<li>C</li>
+			<li>D</li>
+			<li>E</li>
+			<li>F</li>
+			<li>G</li>
+			<li>H</li>
+			<li>I</li>
+			<li>J</li>
+			<li>K</li>
+			<li>L</li>
+			<li>M</li>
+			<li>N</li>
+			<li>O</li>
+			<li>P</li>
+			<li>Q</li>
+			<li>R</li>
+			<li>S</li>
+			<li>T</li>
+			<li>U</li>
+			<li>V</li>
+			<li>W</li>
+			<li>X</li>
+			<li>Y</li>
+			<li>Z</li>
+		</ul>
+
+		<script src="jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+		(function(){
+			var DEBOUNCECOUNT = 5;
+
+			var liContent = $("li"), 
+				showLetter = $(".show-letter"),
+				liTop = [], 
+				debounce = 0;
+
+			function getLiTopValue() {
+				var _top = [];
+				for(var i = 0; i < liContent.length; i ++){
+					_top[i] = liContent.eq(i).offset().top;
+				}
+				return _top;
+			}
+
+			//自己做处理的callback函数，可修改
+			function valueContent(index, value) {
+				if(value){
+					showLetter.html(value);
+				}else{
+					showLetter.html(liContent.eq(index).html());
+				}
+			}
+
+			function touchSlideEventHandle(e) {
+			    var _touch = e.originalEvent.targetTouches[0];
+			    var _y= _touch.pageY;
+				for(var i = liTop.length - 1; i >= 0 ; i --){
+					if(_y > liTop[i]){
+						valueContent(i);
+						debounce = 0;
+						return;
+					}
+				}
+			}
+
+			liTop = getLiTopValue();
+
+			liContent.on('touchstart', touchSlideEventHandle);
+
+			liContent.on("touchmove", function(e){
+				debounce ++;
+				if(debounce == DEBOUNCECOUNT) {
+					touchSlideEventHandle(e);
+				}
+			})
+
+		})()
+
+		</script>
+	</body>
+
+</html>
+
